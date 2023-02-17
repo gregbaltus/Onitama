@@ -4,11 +4,19 @@ class AgentHumain(Agent.Agent):
     def __init__(self, playerName, isFirst):
         super().__init__(playerName, isFirst)
 
-    def choose_card(self, cards):
+    def choose_card(self, board, pieces_list, cards):
+        allowed_cards = []
+        for card in cards:
+            allowed_move = []
+            for piece in pieces_list:
+                allowed_move += piece.allowed_moves1card(board, card)
+            if allowed_move:
+                allowed_cards += [card]
+
         chosen_card = None
         while chosen_card is None:
-            card_name = input("Choisissez une carte parmi : {}\n".format([card.name for card in cards]))
-            for card in cards:
+            card_name = input("Choisissez une carte parmi : {}\n".format([card.name for card in allowed_cards]))
+            for card in allowed_cards:
                 if card.name == card_name:
                     chosen_card = card
                     break

@@ -73,7 +73,7 @@ class Game:
         self.display_BoardCards(tour,  player, oppenentPlayer)
 
         print("Player", player.getName(), "Choose a card :")
-        selectedCard = player.choose_card([player.getCard1(), player.getCard2()])
+        selectedCard = player.choose_card(self.board, self.pieces, [player.getCard1(), player.getCard2()])
         print("Player", player.getName(), "Choose piece :")
         selectedPiece = player.choose_piece(self.board, selectedCard, self.pieces)
         print("Player", player.getName(), "Choose a move (coordonate x,y) :")

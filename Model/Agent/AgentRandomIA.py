@@ -5,8 +5,15 @@ class AgentRandomIA(Agent.Agent):
     def init(self, playerName, isFirst):
         super().init(playerName, isFirst)
 
-    def choose_card(self, cards):
-        return random.choice(cards)
+    def choose_card(self, board, pieces_list, cards):
+        allowed_cards = []
+        for card in cards:
+            allowed_move = []
+            for piece in pieces_list:
+                allowed_move += piece.allowed_moves1card(board, card)
+            if allowed_move:
+                allowed_cards += [card]
+        return random.choice(allowed_cards)
 
     def choose_piece(self, board, card, pieces_list):
         allowed_pieces = []
